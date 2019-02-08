@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Function.h"
 #include<ctype.h>
+#include"constants.h"
 
 Function::Function()
 {
@@ -29,23 +30,40 @@ double Function::eval(double x)
 
 void Function::simplify()
 {
+	vector<ExpTerm> result;
+	cout << "\n Simplifying \n";
 	for (ExpTerm expTerm : expTerms)
 	{	
-		if (isdigit(expTerm.getExp()) && expTerm.getExp() > 0)
+		if (expTerm.getExp() == (int)expTerm.getExp() && expTerm.getExp() > 0)
 		{
 			Expression temp;
 			temp = expTerm.getExpression();
 
 			for (int i = 1; i < expTerm.getExp(); i++)
 				temp = Expression::multiply(temp, temp);
-
 			temp.scalar(expTerm.getCoef());
 			temp.simplify();
 			expTerm.setExpression(temp);
 			expTerm.setCoef(1);
 			expTerm.setExp(1);
 		}
+		result.push_back(expTerm);
 	}
+	expTerms = result;
+}
+
+string Function::getString()
+{
+	string result = string();
+	for (ExpTerm expterm : expTerms)
+	{
+		if (expterm.getCoef() > 0)
+			result += "+";
+
+		result += ( clean(to_string(expterm.getCoef())) + "(" + expterm.getExpression().getString() + ")^" + clean(to_string(expterm.getExp())) + " ");
+	}
+
+	return result;
 }
 
 Function Function::to_func(Expression e)
@@ -53,4 +71,11 @@ Function Function::to_func(Expression e)
 	Function temp;
 	temp.addExpTerm(1, 1, e);
 	return temp;
+}
+
+string Function::clean(string val)
+{
+	while (val[val.size() - 1] == '0')
+		val = val.substr(0, val.size() - 1);
+	return val;
 }

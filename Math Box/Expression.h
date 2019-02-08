@@ -17,6 +17,7 @@ public:
 	string getString();
 	void scalar(double val);
 	double evalFunc(double x);
+	string clean(string val);
 	vector<Term> getTerms();
 
 	static Expression multiply(Expression, Expression);

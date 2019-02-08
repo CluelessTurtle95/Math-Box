@@ -71,11 +71,11 @@ string Expression::getString()
 	for (int i = 0; i < terms.size(); i++)
 	{
 		if (terms[i].getExp() == 0)
-			result += to_string(terms[i].getCoef()) ;
+			result += clean(to_string(terms[i].getCoef())) ;
 		else if (terms[i].getExp() == 1)
-			result += (to_string(terms[i].getCoef()) + "x");
+			result += (clean(to_string(terms[i].getCoef())) + "x");
 		else
-			result += (to_string(terms[i].getCoef()) + "x^" + to_string(terms[i].getExp()));
+			result += (clean(to_string(terms[i].getCoef())) + "x^" + clean(to_string(terms[i].getExp())));
 		if (i < terms.size() - 1)
 		{
 			if (terms[i + 1].getCoef() > 0)
@@ -89,10 +89,13 @@ string Expression::getString()
 
 void Expression::scalar(double val)
 {
+	vector<Term> result;
 	for (Term term : terms)
 	{
 		term.setCoef(val * term.getCoef());
+		result.push_back(term);
 	}
+	terms = result;
 }
 
 double Expression::evalFunc(double x)
@@ -103,4 +106,11 @@ double Expression::evalFunc(double x)
 		result += term.eval(x);
 	}
 	return result;
+}
+
+string Expression::clean(string val)
+{
+	while (val[val.size() - 1] == '0')
+		val = val.substr(0, val.size() - 1);
+	return val;
 }
