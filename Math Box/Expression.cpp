@@ -46,17 +46,22 @@ void Expression::addTerm(double coef, double exp)
 	delete temp;
 }
 
+void Expression::addTerm(Term t)
+{
+	terms.push_back(t);
+}
+
 vector<Term> Expression::getTerms()
 {
 	return terms;
 }
 
-vector<Term> Expression::multiply(Expression a, Expression b)
+Expression Expression::multiply(Expression a, Expression b)
 {
-	vector<Term> result;
+	Expression result;
 	for (int i = 0; i < a.getTerms().size(); i++)
 		for (int j = 0; j < b.getTerms().size(); j++)
-			result.push_back(Term::Multiply(a.getTerms()[i], b.getTerms()[j]));
+			result.addTerm(Term::Multiply(a.getTerms()[i], b.getTerms()[j]));
 	return result;
 }
 
@@ -80,6 +85,14 @@ string Expression::getString()
 		}
 	}
 	return result;
+}
+
+void Expression::scalar(double val)
+{
+	for (Term term : terms)
+	{
+		term.setCoef(val * term.getCoef());
+	}
 }
 
 double Expression::evalFunc(double x)

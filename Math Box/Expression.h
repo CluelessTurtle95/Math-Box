@@ -13,10 +13,12 @@ public:
 	Expression();
 	void simplify();
 	void addTerm(double coef, double exp);
+	void addTerm(Term t);
 	string getString();
+	void scalar(double val);
 	double evalFunc(double x);
 	vector<Term> getTerms();
 
-	static vector<Term> multiply(Expression, Expression);
+	static Expression multiply(Expression, Expression);
 };
 

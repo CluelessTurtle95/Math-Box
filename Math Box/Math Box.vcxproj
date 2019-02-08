@@ -153,6 +153,7 @@
   <ItemGroup>
     <ClInclude Include="Expression.h" />
     <ClInclude Include="constants.h" />
+    <ClInclude Include="ExpTerm.h" />
     <ClInclude Include="Function.h" />
     <ClInclude Include="Integrator.h" />
     <ClInclude Include="ExpParser.h" />
@@ -162,6 +163,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Expression.cpp" />
+    <ClCompile Include="ExpTerm.cpp" />
     <ClCompile Include="Function.cpp" />
     <ClCompile Include="Integrator.cpp" />
     <ClCompile Include="Math Box.cpp" />

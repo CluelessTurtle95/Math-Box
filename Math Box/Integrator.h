@@ -2,12 +2,6 @@
 #include "Function.h"
 #include "constants.h"
 
-enum approximation
-{
-	Left,
-	Right,
-	Mid
-};
 
 class Integrator
 {

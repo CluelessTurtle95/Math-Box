@@ -1,6 +1,7 @@
 #pragma once
 class Term
 {
+protected:
 	double coef;
 	double exponent;
 public:
