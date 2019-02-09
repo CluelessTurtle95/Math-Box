@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Differentiator.h" />
     <ClInclude Include="Expression.h" />
     <ClInclude Include="constants.h" />
     <ClInclude Include="ExpTerm.h" />
@@ -163,6 +164,7 @@
     <ClInclude Include="Term.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Differentiator.cpp" />
     <ClCompile Include="Expression.cpp" />
     <ClCompile Include="ExpTerm.cpp" />
     <ClCompile Include="Function.cpp" />
