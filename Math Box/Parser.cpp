@@ -22,18 +22,36 @@ Parser::Parser()
 
 void Parser::parse()
 {
-	removeChar(' ');
+	str = removeChar(str , ' ');
+	
+	if (str == InvalidStr)
+	{
+		func = Function();
+
+		return;
+	}
 	if (str.find("(") != string::npos)
 	{
 		int openPos , closePos;
 		string temp = searchParen();
-		int expPos = str.find(")^");
-		if (expPos != string::npos)
+		int expPos;
+		if (str.find(")") != string::npos)
 		{
+			while (str.find("+(") != string::npos)
+				str.replace(str.find("+("), 2, "+1(");
+			while (str.find("-(") != string::npos)
+				str.replace(str.find("-("), 2, "-1(");
+
 			while(str.find("(") != string::npos)
 			{
+
+				expPos = str.find(")^");
 				int tempInt;
 				openPos = str.find("(");
+				if (openPos == 0)
+				{
+					str = "1" + str;
+				}
 				closePos = str.find(")");
 				if (openPos == string::npos)
 					break;
@@ -61,15 +79,25 @@ void Parser::parse()
 					str = string();
 				}
 				//cout << str;
-				int coef = stod(token.substr(0, openPos+1));
-				int exponent = stod(token.substr(closePos + 2));
+				int coef;
+				if (openPos != 0)
+					coef = stod(token.substr(0, openPos + 1));
+				else
+					coef = 1;
+
+				int exponent;
+				if (expPos != string::npos)
+					exponent = stod(token.substr(closePos + 2));
+				else
+					exponent = 1;
+
 				//cout << coef << exponent;
 				func.addExpTerm(coef, exponent, simpleParser.getExpression());
 			}
 		}
 		else
 		{
-
+			str = InvalidStr;
 		}
 		
 	}
@@ -81,7 +109,7 @@ void Parser::parse()
 	}
 }
 
-void Parser::removeChar(char ch)
+string Parser::removeChar(string str , char ch)
 {
 	string result;
 	for (size_t i = 0; i < str.size(); i++)
@@ -90,7 +118,7 @@ void Parser::removeChar(char ch)
 		if (currentChar != ch)
 			result += currentChar;
 	}
-	str = result;
+	return result;
 }
 
 Function Parser::getFunction()

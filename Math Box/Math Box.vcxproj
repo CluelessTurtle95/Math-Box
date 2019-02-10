@@ -151,19 +151,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BASE.h" />
     <ClInclude Include="Differentiator.h" />
     <ClInclude Include="Expression.h" />
     <ClInclude Include="constants.h" />
     <ClInclude Include="ExpTerm.h" />
     <ClInclude Include="Function.h" />
+    <ClInclude Include="FunctionList.h" />
     <ClInclude Include="Integrator.h" />
     <ClInclude Include="ExpParser.h" />
     <ClInclude Include="Parser.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Solver.h" />
     <ClInclude Include="Term.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BASE.cpp" />
     <ClCompile Include="Differentiator.cpp" />
     <ClCompile Include="Expression.cpp" />
     <ClCompile Include="ExpTerm.cpp" />
@@ -178,6 +182,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Solver.cpp" />
     <ClCompile Include="Term.cpp" />
   </ItemGroup>
   <ItemGroup>

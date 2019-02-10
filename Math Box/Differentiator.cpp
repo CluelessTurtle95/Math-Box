@@ -16,7 +16,7 @@ double Differentiator::eval(double x)
 {
 	double y;
 
-	y = (function->eval(x + delX) - function->eval(x - delX)) / delX;
+	y = (function->eval(x + delX) - function->eval(x - delX)) / (2*delX);
 
 	return y;
 }

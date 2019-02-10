@@ -14,7 +14,7 @@ public:
 	Parser();
 
 	void parse();
-	void removeChar(char);
+	static string removeChar(string ,char);
 	Function getFunction();
 	void setString(string str);
 };

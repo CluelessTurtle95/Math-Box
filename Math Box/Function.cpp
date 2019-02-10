@@ -36,11 +36,11 @@ void Function::simplify()
 	{	
 		if (expTerm.getExp() == (int)expTerm.getExp() && expTerm.getExp() > 0)
 		{
-			Expression temp;
+			Expression temp,temp2;
 			temp = expTerm.getExpression();
-
+			temp2 = temp;
 			for (int i = 1; i < expTerm.getExp(); i++)
-				temp = Expression::multiply(temp, temp);
+				temp = Expression::multiply(temp2, temp);
 			temp.scalar(expTerm.getCoef());
 			temp.simplify();
 			expTerm.setExpression(temp);

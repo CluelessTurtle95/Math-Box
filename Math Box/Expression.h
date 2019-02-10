@@ -12,7 +12,7 @@ class Expression
 public:
 	Expression();
 	void simplify();
-	void addTerm(double coef, double exp);
+	void addTerm(double coef, double exp , string base);
 	void addTerm(Term t);
 	string getString();
 	void scalar(double val);

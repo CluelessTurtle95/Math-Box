@@ -5,13 +5,14 @@
 
 Term::Term()
 {
+	termBase = BASE();
 	coef = InvalidValue;
 	exponent = InvalidValue;
 }
 
 double Term::eval(double x)
 {
-	return coef * pow(x, exponent);
+	return coef * pow(termBase.eval(x), exponent);
 }
 
 double Term::getCoef()
@@ -34,6 +35,7 @@ void Term::setExp(double val)
 	exponent = val;
 }
 
+
 Term Term::Add(Term a, Term b)
 {
 	Term result;
@@ -46,9 +48,11 @@ Term Term::Add(Term a, Term b)
 }
 
 Term Term::Multiply(Term a, Term b)
-{
+{	
 	Term result;
 	result.exponent = a.exponent + b.exponent;
 	result.coef = a.coef*b.coef;
+	if (a.termBase.baseFunc != b.termBase.baseFunc)
+		return Term();
 	return result;
 }

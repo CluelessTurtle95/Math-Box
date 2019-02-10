@@ -2,6 +2,7 @@
 #include "Expression.h"
 #include "constants.h"
 #include<string>
+#include"BASE.h"
 
 Expression::Expression()
 {
@@ -37,11 +38,12 @@ void Expression::simplify()
 	terms = result;
 }
 
-void Expression::addTerm(double coef, double exp)
+void Expression::addTerm(double coef, double exp , string base)
 {
 	Term* temp = new Term();
 	temp->setCoef(coef);
 	temp->setExp(exp);
+	temp->termBase.baseFunc = base;
 	terms.push_back(*temp);
 	delete temp;
 }
@@ -73,9 +75,9 @@ string Expression::getString()
 		if (terms[i].getExp() == 0)
 			result += clean(to_string(terms[i].getCoef())) ;
 		else if (terms[i].getExp() == 1)
-			result += (clean(to_string(terms[i].getCoef())) + "x");
+			result += (clean(to_string(terms[i].getCoef())) + terms[i].termBase.baseFunc );
 		else
-			result += (clean(to_string(terms[i].getCoef())) + "x^" + clean(to_string(terms[i].getExp())));
+			result += (clean(to_string(terms[i].getCoef())) + terms[i].termBase.baseFunc + "^" + clean(to_string(terms[i].getExp())));
 		if (i < terms.size() - 1)
 		{
 			if (terms[i + 1].getCoef() > 0)
