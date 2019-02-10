@@ -4,8 +4,8 @@
 
 string Parser::searchParen()
 {
-	int openPos = str.find("(");
-	int closePos = str.find(")");
+	unsigned int openPos = str.find("(");
+	unsigned int closePos = str.find(")");
 
 	if (openPos == string::npos || closePos == string::npos)
 		return InvalidStr;
@@ -32,9 +32,9 @@ void Parser::parse()
 	}
 	if (str.find("(") != string::npos)
 	{
-		int openPos , closePos;
+		unsigned int openPos , closePos;
 		string temp = searchParen();
-		int expPos;
+		unsigned int expPos;
 		if (str.find(")") != string::npos)
 		{
 			while (str.find("+(") != string::npos)
@@ -46,7 +46,7 @@ void Parser::parse()
 			{
 
 				expPos = str.find(")^");
-				int tempInt;
+				unsigned int tempInt;
 				openPos = str.find("(");
 				if (openPos == 0)
 				{
@@ -79,13 +79,13 @@ void Parser::parse()
 					str = string();
 				}
 				//cout << str;
-				int coef;
+				double coef;
 				if (openPos != 0)
 					coef = stod(token.substr(0, openPos + 1));
 				else
 					coef = 1;
 
-				int exponent;
+				double exponent;
 				if (expPos != string::npos)
 					exponent = stod(token.substr(closePos + 2));
 				else

@@ -8,7 +8,7 @@ protected:
 	double exponent;
 public:
 
-	BASE termBase;
+	Base termBase;
 
 	Term();
 	double eval(double x);

@@ -5,7 +5,7 @@
 
 Term::Term()
 {
-	termBase = BASE();
+	termBase = Base();
 	coef = InvalidValue;
 	exponent = InvalidValue;
 }
@@ -45,6 +45,7 @@ Term Term::Add(Term a, Term b)
 	{
 		result.coef = a.coef + b.coef;
 		result.exponent = a.exponent;
+		result.termBase.baseFunc = a.termBase.baseFunc;
 	}
 	return result;
 }
@@ -54,7 +55,6 @@ Term Term::Multiply(Term a, Term b)
 	Term result;
 	result.exponent = a.exponent + b.exponent;
 	result.coef = a.coef*b.coef;
-	if (a.termBase.baseFunc != b.termBase.baseFunc)
-		return Term();
+	result.termBase = Base::combine(a.termBase, b.termBase);
 	return result;
 }

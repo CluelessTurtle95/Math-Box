@@ -14,7 +14,7 @@ ExpParser::ExpParser()
 void ExpParser::parse()
 {
 	vector<int> baseSearch;
-	for (string baseStr : BASE::globalBaseList )
+	for (string baseStr : Base::globalBaseList )
 	{
 		while (str.find("+" + baseStr) != string::npos)
 			str.replace(str.find("+" + baseStr), 1 + baseStr.length(), "+1" + baseStr);
@@ -24,7 +24,6 @@ void ExpParser::parse()
 
 	int first = 0;
 	string base;
-
 
 	expression = Expression();
 	int plus_pos, minus_pos, min_pos, x_pos, max_pos = 1, exp_pos;
@@ -38,7 +37,7 @@ void ExpParser::parse()
 		
 		first = 1000;
 		base = string();
-		for (string baseStr : BASE::globalBaseList)
+		for (string baseStr : Base::globalBaseList)
 		{
 			if (str.find(baseStr) <= first)
 			{
@@ -69,8 +68,10 @@ void ExpParser::parse()
 
 		if (min_pos != string::npos)
 			str = str.substr(min_pos);
-		// cout << "\n str = " << str << "\n";
+		//cout << "\n str = " << str << "\n";
 		exp_pos = token.find("^");
+		if (base == "")
+			base = "x";
 		x_pos = token.find(base);
 		
 		coef = 1  ;
@@ -87,7 +88,7 @@ void ExpParser::parse()
 			exponent = 1;
 		else
 			exponent = 0;
-
+		//cout << base;
 		expression.addTerm(coef, exponent , base);
 		i++;
 	}
