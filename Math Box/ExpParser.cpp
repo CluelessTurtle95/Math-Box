@@ -24,31 +24,7 @@ void ExpParser::parse()
 
 	int first = 0;
 	string base;
-	
 
-//	int first = 0, index = 0;
-//	vector<string> baseList;
-//	bool flag = true;
-//	while (flag)
-//	{
-//		flag = false;
-//		for (int i = 0; i < baseSearch.size(); i++)
-//		{
-//			if (baseSearch[i] != string::npos)
-//				if (baseSearch[i] <= first)
-//				{
-//					first = baseSearch[i];
-//					index = i;
-//					flag = true;
-//				}
-//		}
-//		if (flag)
-//		{
-//			baseList.push_back(BASE::globalBaseList[index]);
-//			baseSearch.erase(baseSearch.begin() + index);
-//		}
-//	}
-//
 
 	expression = Expression();
 	int plus_pos, minus_pos, min_pos, x_pos, max_pos = 1, exp_pos;
@@ -60,7 +36,8 @@ void ExpParser::parse()
 	{
 		//cout << baseList[0] << baseList[1] << baseList[2];
 		
-		first = 0;
+		first = 1000;
+		base = string();
 		for (string baseStr : BASE::globalBaseList)
 		{
 			if (str.find(baseStr) <= first)
@@ -69,7 +46,7 @@ void ExpParser::parse()
 				base = baseStr;
 			}
 		}
-		
+		//cout << base;
 		plus_pos = str.find("+");
 		if (plus_pos != string::npos)
 			if (plus_pos == 0)
@@ -92,7 +69,7 @@ void ExpParser::parse()
 
 		if (min_pos != string::npos)
 			str = str.substr(min_pos);
-
+		// cout << "\n str = " << str << "\n";
 		exp_pos = token.find("^");
 		x_pos = token.find(base);
 		

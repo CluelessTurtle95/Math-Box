@@ -39,6 +39,8 @@ void Term::setExp(double val)
 Term Term::Add(Term a, Term b)
 {
 	Term result;
+	if (a.termBase.baseFunc != b.termBase.baseFunc)
+		return result;
 	if (a.exponent == b.exponent)
 	{
 		result.coef = a.coef + b.coef;
